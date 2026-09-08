@@ -106,12 +106,15 @@ function wireTopEvents() {
         <div data-idx="${i}"><b>${escapeHtml(r.name)}</b><br><span style="color:#a08a6d">${escapeHtml(r.fullName)}</span></div>
       `).join('');
       suggestionsEl.querySelectorAll('[data-idx]').forEach(row => {
-        row.onclick = () => {
+        // 用 pointerdown 而不是 click:手机上点建议项时输入框会先 blur,
+        // 如果用 click,等事件真正触发时 blur 的清空逻辑可能已经把这一项从 DOM 里删掉了,导致点击没反应。
+        row.addEventListener('pointerdown', (e) => {
+          e.preventDefault();
           const r = results[row.dataset.idx];
           addPlaceToPool(r);
           suggestionsEl.innerHTML = '';
           searchInput.value = '';
-        };
+        });
       });
     }, 300);
   });

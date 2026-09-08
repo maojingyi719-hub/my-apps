@@ -1,4 +1,4 @@
-const CACHE_NAME = 'yuru-travel-planner-v2';
+const CACHE_NAME = 'yuru-travel-planner-v3';
 const SHELL_FILES = ['./', './index.html', './style.css', './api.js', './app.js', './manifest.json'];
 
 self.addEventListener('install', event => {
