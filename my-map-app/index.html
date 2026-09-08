@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1" />
+<title>我的地图</title>
+
+<link rel="manifest" href="manifest.json" />
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="theme-color" content="#2563eb" />
+
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.6.0/mapbox-gl.css" rel="stylesheet" />
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.6.0/mapbox-gl.js"></script>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div id="map"></div>
+
+<div id="top-bar">
+  <input id="search-input" type="text" placeholder="搜索地点…" autocomplete="off" />
+  <button id="locate-btn" title="定位到我">📍</button>
+  <button id="list-btn" title="我的收藏">☆</button>
+</div>
+
+<div id="suggestions"></div>
+
+<div id="panel">
+  <h3>我的收藏 <button id="panel-close">✕</button></h3>
+  <div id="favorites-list"></div>
+</div>
+
+<div id="route-info">
+  <span id="route-text"></span>
+  <button id="route-clear">清除路线</button>
+</div>
+
+<script>
+  window.MAPBOX_TOKEN = "pk.eyJ1IjoiamVzc2llLW0iLCJhIjoiY210cXR6b3o3MDFyYTJ3cTBzODMyajZhNCJ9.yD9CJa31TodLp21NDC3daQ";
+</script>
+<script src="app.js"></script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  });
+}
+</script>
+</body>
+</html>

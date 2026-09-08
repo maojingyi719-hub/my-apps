@@ -1,0 +1,304 @@
+* { box-sizing: border-box; }
+
+:root {
+  --cream: #fdf3e2;
+  --paper: #fffaf1;
+  --ink: #5b4330;
+  --ink-soft: #8a7157;
+  --brown: #a8763e;
+  --brown-dark: #7a5730;
+  --orange: #e08a3f;
+  --orange-dark: #c96f2b;
+  --green: #6b8354;
+  --green-dark: #526640;
+  --night: #33405c;
+  --border: #e6d2ac;
+  --shadow: 0 4px 14px rgba(90, 60, 20, .12);
+}
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: "Segoe UI", system-ui, "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+h1, h2, h3, .brand-font {
+  font-family: "ZCOOL KuaiLe", "Segoe UI", system-ui, sans-serif;
+  color: var(--brown-dark);
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* ---------- 顶部营地风头图 ---------- */
+#hero {
+  position: relative;
+  background: linear-gradient(180deg, var(--night) 0%, #4a5b7d 55%, var(--orange) 100%);
+  padding: 22px 16px 46px;
+  overflow: hidden;
+}
+#hero::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 60px;
+  background:
+    linear-gradient(115deg, transparent 49%, var(--cream) 50%) 0 0/70px 60px repeat-x,
+    linear-gradient(65deg, transparent 49%, var(--cream) 50%) 35px 0/70px 60px repeat-x;
+  opacity: .95;
+}
+#hero-content { position: relative; z-index: 2; }
+#hero h1 {
+  margin: 0 0 4px;
+  color: #fff4e0;
+  font-size: 26px;
+  text-shadow: 0 2px 6px rgba(0,0,0,.25);
+}
+#hero .tagline {
+  color: #ffe6bd;
+  font-size: 13px;
+  margin: 0 0 16px;
+}
+
+.field-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+.field-row label {
+  font-size: 12px;
+  color: #ffe6bd;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.field-row input[type="text"],
+.field-row input[type="date"] {
+  border: none;
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 14px;
+  background: rgba(255,250,241,.95);
+  color: var(--ink);
+}
+#trip-name { flex: 1; min-width: 160px; }
+
+#search-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+  position: relative;
+}
+#search-input {
+  flex: 1;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 15px;
+  background: rgba(255,250,241,.97);
+  box-shadow: var(--shadow);
+}
+#suggestions {
+  position: absolute;
+  top: 48px; left: 0; right: 0;
+  background: var(--paper);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  z-index: 20;
+  max-height: 240px;
+  overflow-y: auto;
+}
+#suggestions div {
+  padding: 10px 14px;
+  border-bottom: 1px dashed var(--border);
+  font-size: 14px;
+  color: var(--ink);
+}
+#suggestions div:last-child { border-bottom: none; }
+#suggestions:empty { display: none; }
+
+/* ---------- 地点库 ---------- */
+#pool-section {
+  margin: -28px 12px 16px;
+  position: relative;
+  z-index: 3;
+}
+.card {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 14px 16px;
+}
+.card h2 {
+  margin: 0 0 10px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+#pool-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.pool-chip {
+  background: #fff2dc;
+  border: 1px dashed var(--brown);
+  border-radius: 20px;
+  padding: 6px 10px 6px 12px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.pool-chip select {
+  border: none;
+  background: var(--orange);
+  color: #fff;
+  border-radius: 10px;
+  font-size: 12px;
+  padding: 3px 6px;
+}
+.pool-chip .del { border: none; background: none; color: #b95; font-weight: bold; }
+
+/* ---------- 日期分页 tabs ---------- */
+#day-tabs {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  margin: 0 12px 12px;
+  padding-bottom: 2px;
+}
+.day-tab {
+  flex: none;
+  border: 1px solid var(--brown);
+  background: #fff2dc;
+  color: var(--brown-dark);
+  border-radius: 12px 12px 0 0;
+  padding: 8px 14px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+.day-tab.active {
+  background: var(--orange);
+  color: white;
+  border-color: var(--orange-dark);
+}
+
+#day-panel { margin: 0 12px 24px; display: flex; flex-direction: column; gap: 12px; }
+
+/* ---------- 天气卡片 ---------- */
+.weather-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.weather-card .emoji { font-size: 34px; }
+.weather-card .temp { font-size: 20px; font-weight: bold; color: var(--brown-dark); }
+.weather-card .sub { font-size: 12px; color: var(--ink-soft); }
+.weather-card .note-tag {
+  margin-left: auto;
+  font-size: 11px;
+  background: #eee0c8;
+  color: var(--brown-dark);
+  padding: 3px 8px;
+  border-radius: 10px;
+}
+
+/* ---------- 交通方式切换 ---------- */
+.mode-toggle { display: flex; gap: 8px; }
+.mode-btn {
+  flex: 1;
+  border: 1px solid var(--border);
+  background: var(--paper);
+  border-radius: 12px;
+  padding: 10px 6px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+.mode-btn.active {
+  background: var(--green);
+  color: white;
+  border-color: var(--green-dark);
+}
+.mode-summary { font-size: 12px; color: var(--ink-soft); margin-top: 8px; text-align: center; }
+
+#auto-sort-btn, .primary-btn {
+  border: none;
+  background: var(--orange);
+  color: white;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 14px;
+  box-shadow: var(--shadow);
+}
+#auto-sort-btn:active, .primary-btn:active { background: var(--orange-dark); }
+
+/* ---------- 地图 ---------- */
+#day-map { width: 100%; height: 260px; border-radius: 14px; overflow: hidden; border: 1px solid var(--border); }
+
+/* ---------- 地点列表(排序) ---------- */
+#place-list { display: flex; flex-direction: column; gap: 10px; }
+.place-card {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--paper);
+  padding: 10px 12px;
+}
+.place-card .row1 {
+  display: flex; align-items: center; gap: 8px;
+}
+.place-card .badge {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--green);
+  color: white;
+  font-size: 12px;
+  display: flex; align-items: center; justify-content: center;
+  flex: none;
+}
+.place-card .pname { font-weight: bold; flex: 1; font-size: 14px; }
+.place-card .drag-handle { cursor: grab; color: var(--ink-soft); }
+.place-card .leg-info {
+  font-size: 11px;
+  color: var(--ink-soft);
+  margin: 6px 0 4px 32px;
+}
+.place-card .links { display: flex; gap: 10px; margin: 6px 0 4px 32px; flex-wrap: wrap; }
+.place-card .links a, .place-card .links button {
+  font-size: 12px;
+  color: var(--brown-dark);
+  background: #f3e6cc;
+  border: none;
+  border-radius: 8px;
+  padding: 4px 8px;
+  text-decoration: none;
+}
+.place-card .wiki-summary {
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin: 6px 0 2px 32px;
+  line-height: 1.5;
+  display: none;
+}
+.place-card .wiki-summary.show { display: block; }
+.place-card textarea.notes {
+  margin: 6px 0 0 32px;
+  width: calc(100% - 32px);
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  padding: 6px 8px;
+  font-size: 12px;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 34px;
+  background: #fffdf8;
+}
+.place-card .remove-btn {
+  border: none; background: none; color: #c96f2b; font-size: 16px; margin-left: auto;
+}
+
+.empty-hint { color: var(--ink-soft); font-size: 13px; text-align: center; padding: 20px 0; }
+
+footer.tip {
+  text-align: center;
+  font-size: 11px;
+  color: var(--ink-soft);
+  padding: 10px 20px 30px;
+}

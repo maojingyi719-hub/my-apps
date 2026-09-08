@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1" />
+<title>露营风旅行规划</title>
+
+<link rel="manifest" href="manifest.json" />
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="theme-color" content="#a8763e" />
+
+<link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet" />
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.6.0/mapbox-gl.css" rel="stylesheet" />
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.6.0/mapbox-gl.js"></script>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header id="hero">
+  <div id="hero-content">
+    <h1>🏕️ 露营风旅行规划</h1>
+    <p class="tagline">输入想去的地点,自动帮你按天排好路线</p>
+
+    <div class="field-row">
+      <label>行程名称
+        <input id="trip-name" type="text" placeholder="例如:秋日露营之旅" />
+      </label>
+      <label>出发日期
+        <input id="start-date" type="date" />
+      </label>
+      <label>返程日期
+        <input id="end-date" type="date" />
+      </label>
+    </div>
+
+    <div id="search-row">
+      <input id="search-input" type="text" placeholder="搜索想去的地点,加入行程…" autocomplete="off" />
+      <div id="suggestions"></div>
+    </div>
+  </div>
+</header>
+
+<section id="pool-section">
+  <div class="card">
+    <h2>🎒 待安排的地点</h2>
+    <div id="pool-list"></div>
+    <p class="empty-hint" id="pool-empty" style="display:none;">还没有地点,先在上面搜索添加几个想去的地方吧</p>
+  </div>
+</section>
+
+<div id="day-tabs"></div>
+<div id="day-panel"></div>
+
+<footer class="tip">数据只保存在你自己的浏览器里,不会上传到任何服务器 🍃</footer>
+
+<script>
+  window.MAPBOX_TOKEN = "pk.eyJ1IjoiamVzc2llLW0iLCJhIjoiY210cXR6b3o3MDFyYTJ3cTBzODMyajZhNCJ9.yD9CJa31TodLp21NDC3daQ";
+</script>
+<script src="api.js"></script>
+<script src="app.js"></script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  });
+}
+</script>
+</body>
+</html>
