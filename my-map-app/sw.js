@@ -1,4 +1,4 @@
-const CACHE_NAME = 'my-map-app-v1';
+const CACHE_NAME = 'my-map-app-v2';
 const SHELL_FILES = ['./', './index.html', './style.css', './app.js', './manifest.json'];
 
 self.addEventListener('install', event => {
