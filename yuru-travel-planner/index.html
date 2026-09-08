@@ -20,6 +20,7 @@
 
 <header id="hero">
   <div id="hero-content">
+    <button id="avatar-badge" class="avatar-badge" title="我的形象"></button>
     <h1>🏕️ 露营风旅行规划</h1>
     <p class="tagline">输入想去的地点,自动帮你按天排好路线</p>
 
@@ -55,11 +56,33 @@
 
 <footer class="tip">数据只保存在你自己的浏览器里,不会上传到任何服务器 🍃</footer>
 
+<div id="avatar-overlay" class="avatar-overlay">
+  <div id="avatar-panel" class="avatar-panel">
+    <div class="avatar-panel-header">
+      <h2>🧑‍🌾 我的形象</h2>
+      <button id="avatar-panel-close">✕</button>
+    </div>
+    <div id="avatar-preview" class="avatar-preview"></div>
+
+    <div class="avatar-section"><span class="avatar-label">肤色</span><div id="row-skin" class="swatch-row"></div></div>
+    <div class="avatar-section"><span class="avatar-label">眼型</span><div id="row-eyeShape" class="opt-row"></div></div>
+    <div class="avatar-section"><span class="avatar-label">瞳色</span><div id="row-eyeColor" class="swatch-row"></div></div>
+    <div class="avatar-section"><span class="avatar-label">表情</span><div id="row-mouth" class="opt-row"></div></div>
+    <div class="avatar-section"><span class="avatar-label">腮红</span><div id="row-blush" class="opt-row"></div></div>
+    <div class="avatar-section"><span class="avatar-label">发型</span><div id="row-hairStyle" class="opt-row"></div></div>
+    <div class="avatar-section"><span class="avatar-label">发色</span><div id="row-hairColor" class="swatch-row"></div></div>
+    <div class="avatar-section"><span class="avatar-label">上衣款式</span><div id="row-outfit" class="opt-row"></div></div>
+    <div class="avatar-section"><span class="avatar-label">上衣颜色</span><div id="row-outfitColor" class="swatch-row"></div></div>
+    <div class="avatar-section"><span class="avatar-label">配饰</span><div id="row-accessory" class="opt-row"></div></div>
+  </div>
+</div>
+
 <script>
   window.MAPBOX_TOKEN = "pk.eyJ1IjoiamVzc2llLW0iLCJhIjoiY210cXR6b3o3MDFyYTJ3cTBzODMyajZhNCJ9.yD9CJa31TodLp21NDC3daQ";
 </script>
 <script src="api.js"></script>
 <script src="app.js"></script>
+<script src="avatar.js"></script>
 
 <script>
 if ('serviceWorker' in navigator) {

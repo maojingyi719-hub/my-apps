@@ -302,3 +302,73 @@ footer.tip {
   color: var(--ink-soft);
   padding: 10px 20px 30px;
 }
+
+/* ---------- 人物形象 ---------- */
+.avatar-badge {
+  position: absolute;
+  top: 18px; right: 16px;
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  border: 2px solid #fff4e0;
+  background: #fff2dc;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  z-index: 5;
+}
+.avatar-badge svg { display: block; width: 100%; height: 100%; }
+
+.avatar-overlay {
+  position: fixed; inset: 0;
+  background: rgba(51, 40, 20, .45);
+  display: flex; align-items: flex-end;
+  z-index: 50;
+  opacity: 0; pointer-events: none;
+  transition: opacity .2s ease;
+}
+.avatar-overlay.open { opacity: 1; pointer-events: auto; }
+.avatar-panel {
+  background: var(--paper);
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  border-radius: 20px 20px 0 0;
+  padding: 16px 18px calc(24px + env(safe-area-inset-bottom, 0));
+  transform: translateY(100%);
+  transition: transform .25s ease;
+}
+.avatar-overlay.open .avatar-panel { transform: translateY(0); }
+
+.avatar-panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.avatar-panel-header h2 { margin: 0; font-size: 18px; }
+#avatar-panel-close { border: none; background: #eee; border-radius: 50%; width: 30px; height: 30px; }
+
+.avatar-preview {
+  display: flex; justify-content: center;
+  background: #fff2dc;
+  border-radius: 16px;
+  padding: 12px;
+  margin-bottom: 14px;
+}
+
+.avatar-section { margin-bottom: 14px; }
+.avatar-label { display: block; font-size: 12px; color: var(--ink-soft); margin-bottom: 6px; }
+.swatch-row, .opt-row { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.swatch {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  padding: 0;
+}
+.swatch.active { border-color: var(--brown-dark); box-shadow: 0 0 0 2px #fff2dc inset; }
+
+.opt-btn {
+  border: 1px solid var(--border);
+  background: var(--paper);
+  border-radius: 10px;
+  padding: 6px 10px;
+  font-size: 13px;
+  color: var(--ink);
+}
+.opt-btn.active { background: var(--green); color: #fff; border-color: var(--green-dark); }

@@ -1,5 +1,5 @@
-const CACHE_NAME = 'yuru-travel-planner-v4';
-const SHELL_FILES = ['./', './index.html', './style.css', './api.js', './app.js', './manifest.json'];
+const CACHE_NAME = 'yuru-travel-planner-v5';
+const SHELL_FILES = ['./', './index.html', './style.css', './api.js', './app.js', './avatar.js', './manifest.json'];
 
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(SHELL_FILES)));
