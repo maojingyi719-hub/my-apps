@@ -1,4 +1,11 @@
-mapboxgl.accessToken = window.MAPBOX_TOKEN;
+// mapboxgl 有可能因为广告拦截插件/网络问题没有加载成功,这里不能直接用,
+// 否则这一行报错会导致整个文件后面的代码(包括搜索、收藏这些不依赖地图的功能)全部不执行。
+if (typeof mapboxgl !== 'undefined') {
+  mapboxgl.accessToken = window.MAPBOX_TOKEN;
+} else {
+  document.body.insertAdjacentHTML('afterbegin',
+    '<div style="padding:16px;background:#fee;color:#c0392b;font-size:14px;">⚠️ 地图脚本加载失败(可能是广告拦截插件或网络问题),搜索/收藏仍可使用,请检查网络后刷新页面重试。</div>');
+}
 
 // 地图初始化如果失败(WebGL 不支持/网络问题等),用一个空操作的替身对象兜底,
 // 这样搜索、收藏等不依赖地图渲染的功能仍然能正常工作,不会被这里的异常连累。

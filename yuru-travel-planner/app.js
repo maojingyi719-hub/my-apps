@@ -1,4 +1,8 @@
-mapboxgl.accessToken = window.MAPBOX_TOKEN;
+// mapboxgl 有可能因为广告拦截插件/网络问题没有加载成功,这里不能直接用,
+// 否则这一行报错会导致整个文件后面的代码(包括搜索、日期、备注这些不依赖地图的功能)全部不执行。
+if (typeof mapboxgl !== 'undefined') {
+  mapboxgl.accessToken = window.MAPBOX_TOKEN;
+}
 
 const STORAGE_KEY = 'yuruTripData';
 let state = null;
