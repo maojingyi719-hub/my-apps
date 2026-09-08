@@ -1,12 +1,27 @@
 mapboxgl.accessToken = window.MAPBOX_TOKEN;
 
-const map = new mapboxgl.Map({
-  container: 'map',
-  style: 'mapbox://styles/mapbox/streets-v12',
-  center: [0, 20],
-  zoom: 2,
-});
-map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
+// 地图初始化如果失败(WebGL 不支持/网络问题等),用一个空操作的替身对象兜底,
+// 这样搜索、收藏等不依赖地图渲染的功能仍然能正常工作,不会被这里的异常连累。
+let map;
+try {
+  map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v12',
+    center: [0, 20],
+    zoom: 2,
+  });
+  map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
+} catch (e) {
+  console.error('地图初始化失败:', e);
+  const noop = () => {};
+  map = {
+    flyTo: noop, on: noop, addControl: noop, fitBounds: noop,
+    getSource: () => null, addSource: noop, removeSource: noop,
+    getLayer: () => null, addLayer: noop, removeLayer: noop,
+  };
+  document.getElementById('map').insertAdjacentHTML('afterbegin',
+    '<div style="padding:20px;color:#c0392b;background:#fff;">⚠️ 地图加载失败,搜索/收藏仍可使用。请检查网络后刷新重试。</div>');
+}
 
 let userLocation = null;
 let userMarker = null;

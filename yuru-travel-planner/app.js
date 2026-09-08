@@ -49,8 +49,15 @@ function init() {
   document.getElementById('start-date').value = state.startDate || '';
   document.getElementById('end-date').value = state.endDate || '';
 
-  buildDayPanelSkeleton();
+  // 搜索等基础交互要先绑定,确保就算地图初始化失败也不影响其它功能
   wireTopEvents();
+  try {
+    buildDayPanelSkeleton();
+  } catch (e) {
+    console.error('地图初始化失败:', e);
+    document.getElementById('day-panel').insertAdjacentHTML('afterbegin',
+      '<div class="card" style="color:#c0392b;">⚠️ 地图加载失败,其它功能不受影响。请检查网络或刷新页面重试。</div>');
+  }
   renderPool();
   renderDayTabs();
   if (state.activeDay) renderDayContent(state.activeDay);
@@ -393,11 +400,13 @@ async function autoSortDay(dateStr) {
 // ---------- 路线计算 + 地图渲染 ----------
 function clearDayMarkers() { dayMarkers.forEach(m => m.remove()); dayMarkers = []; }
 function removeRouteLayer() {
+  if (!dayMap) return;
   if (dayMap.getLayer('day-route-line')) dayMap.removeLayer('day-route-line');
   if (dayMap.getSource(DAY_ROUTE_SOURCE)) dayMap.removeSource(DAY_ROUTE_SOURCE);
 }
 
 async function updateRouteAndMap(dateStr) {
+  if (!dayMap) return; // 地图初始化失败时,其它功能(搜索/收藏/天气/备注)仍可正常使用
   const ids = state.dayAssignment[dateStr] || [];
   const profile = state.dayMode[dateStr] || 'driving';
   const summaryEl = document.getElementById('mode-summary');
